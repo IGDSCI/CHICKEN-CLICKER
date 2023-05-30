@@ -16,6 +16,8 @@ public class Main {
     int contador = 1;
     private double multiplicadorSorte = 3.0;
     private double cancheDeGolpeDaSorte = 0.25;
+    private int upgrade1 = 10;
+    private int upgrade2 = 50;
 
     String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
@@ -122,12 +124,12 @@ public class Main {
         itemPanel.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel);
 
-        JButton upgradeButton = new JButton("Upgrade (10 R$)");
+        JButton upgradeButton = new JButton("Upgrade (R$" + upgrade1 + ")");
         upgradeButton.setFont(font1);
         backgroundPanel.add(upgradeButton);
         itemPanel.add(upgradeButton);
 
-        JButton upgradeButton2 = new JButton("Upgrade (50 R$)");
+        JButton upgradeButton2 = new JButton("Upgrade (R$" + upgrade2 + ")");
         upgradeButton2.setFont(font1);
         backgroundPanel.add(upgradeButton2);
         itemPanel.add(upgradeButton2);
@@ -138,13 +140,15 @@ public class Main {
         upgradeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 playClickSoundUpgrade();
-                if (dinheiro >= 10) {
+                if (dinheiro >= upgrade1) {
                     // Ação a ser executada quando o dinheiro for maior que 10
                     System.out.println("Upgrade realizado!");
-                    dinheiro = dinheiro - 10;
+                    dinheiro = dinheiro - upgrade1;
                     contador = contador + 1;
+                    upgrade1 = upgrade1 + 60;
                     scoreLabel.setText("Dinheiro: " + dinheiro); // Atualizar o texto do JLabel com o valor do contador
                     labelPoderClick.setText("Dinheiro por clique: " + contador);
+                    upgradeButton.setText("Upgrade (R$" + upgrade1 + ")");
                 } else {
                     // Ação a ser executada quando o dinheiro for menor ou igual a 10
                     System.out.println("Dinheiro insuficiente para o upgrade!");
@@ -155,13 +159,15 @@ public class Main {
         upgradeButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 playClickSoundLucky();
-                if (dinheiro >= 50) {
+                if (dinheiro >= upgrade2) {
                     // Ação a ser executada quando o dinheiro for maior ou igual a 50
                     System.out.println("Upgrade realizado!");
                     cancheDeGolpeDaSorte = 1;
-                    dinheiro -= 50;
+                    dinheiro -= upgrade2;
+                    upgrade2 = upgrade2 + 80;
                     scoreLabel.setText("Dinheiro: " + dinheiro);
                     chanceGolpeSorte.setText("Chanche golpe de sorte: " + cancheDeGolpeDaSorte);
+                    upgradeButton2.setText("Upgrade (R$" + upgrade2 + ")");
                 } else {
                     // Ação a ser executada quando o dinheiro for menor que 50
                     System.out.println("Dinheiro insuficiente para o upgrade!");
