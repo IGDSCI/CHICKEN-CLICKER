@@ -1,3 +1,6 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -100,6 +103,7 @@ public class Main {
         chickenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                playClickSound();
                 // Verifique se ocorre um golpe de sorte
                 double sorte = Math.random();
                 if (sorte <= cancheDeGolpeDaSorte) {
@@ -133,6 +137,7 @@ public class Main {
 
         upgradeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                playClickSoundUpgrade();
                 if (dinheiro >= 10) {
                     // Ação a ser executada quando o dinheiro for maior que 10
                     System.out.println("Upgrade realizado!");
@@ -149,6 +154,7 @@ public class Main {
 
         upgradeButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                playClickSoundLucky();
                 if (dinheiro >= 50) {
                     // Ação a ser executada quando o dinheiro for maior ou igual a 50
                     System.out.println("Upgrade realizado!");
@@ -162,6 +168,76 @@ public class Main {
                 }
             }
         });
+
+        // Declaração das variáveis de tamanho original do ícone
+        int larguraOriginal = chicken.getIconWidth();
+        int alturaOriginal = chicken.getIconHeight();
+
+        chickenButton.addActionListener(new ActionListener() {
+            private boolean foiReduzido = false; // Indica se a imagem está reduzida
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Verifique se ocorre um golpe de sorte
+                double sorte = Math.random();
+                if (sorte <= cancheDeGolpeDaSorte) {
+                    dinheiro += contador * multiplicadorSorte;
+                } else {
+                    dinheiro = dinheiro + contador;
+                }
+
+                scoreLabel.setText("Pontuação: " + dinheiro);
+
+                if (foiReduzido) {
+                    // Restaurar o tamanho original do ícone
+                    chickenButton.setIcon(chicken);
+                } else {
+                    // Reduzir o tamanho do ícone
+                    int novaLargura = chicken.getIconWidth() - 10; // Diminua 10 pixels da largura atual
+                    int novoTamanho = chicken.getIconHeight() - 10; // Diminua 10 pixels da altura atual
+                    if (novaLargura > 0 && novoTamanho > 0) {
+                        Image scaledImage = chicken.getImage().getScaledInstance(novaLargura, novoTamanho, Image.SCALE_DEFAULT);
+                        chickenButton.setIcon(new ImageIcon(scaledImage));
+                    }
+                }
+
+                // Inverter o estado de redução da imagem
+                foiReduzido = !foiReduzido;
+            }
+        });
         window.setVisible(true);
+    }
+
+    public void playClickSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("chickenSound.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playClickSoundUpgrade() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("upgradeSound.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playClickSoundLucky() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("luckySound.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
