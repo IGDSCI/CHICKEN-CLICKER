@@ -5,6 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     private int clickCount = 0;
@@ -22,6 +27,35 @@ public class Main {
     String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
     public static void main(String[] args) {
+
+       String path = "c:\\in.txt";
+
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try{
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            String line = br.readLine();
+            while(line!=null){
+                System.out.println(line);
+                line = br.readLine();
+            }
+        }
+        catch (IOException e){
+            System.out.println("ERRO: " + e.getMessage());
+        }
+        finally {
+            try{
+                br.close();
+                fr.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         new Main();
     }
 
@@ -246,4 +280,5 @@ public class Main {
             e.printStackTrace();
         }
     }
+
 }
