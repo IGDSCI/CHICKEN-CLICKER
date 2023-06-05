@@ -42,6 +42,7 @@ public class Main {
             FileWriter writer = new FileWriter(arquivoDados);
             writer.write(nomeJogador + "\n");
             writer.write(dinheiro + "\n");
+            writer.write(contador + "\n");
 
 
             writer.close();
@@ -60,6 +61,8 @@ public class Main {
 
             nomeJogador = bufferedReader.readLine();
             dinheiro = Integer.parseInt(bufferedReader.readLine());
+            contador = Integer.parseInt(bufferedReader.readLine());
+
 
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
