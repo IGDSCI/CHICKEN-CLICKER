@@ -20,7 +20,6 @@ public class Main {
     private double cancheDeGolpeDaSorte = 0.25;
     private int upgrade1 = 10;
     private int upgrade2 = 50;
-    int pontuacao = 1;
 
     static String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
@@ -42,6 +41,7 @@ public class Main {
         try {
             FileWriter writer = new FileWriter(arquivoDados);
             writer.write(nomeJogador + "\n");
+            writer.write(dinheiro + "\n");
 
 
             writer.close();
@@ -59,7 +59,7 @@ public class Main {
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             nomeJogador = bufferedReader.readLine();
-
+            dinheiro = Integer.parseInt(bufferedReader.readLine());
 
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
