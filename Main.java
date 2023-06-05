@@ -5,10 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -17,38 +14,58 @@ public class Main {
     private JLabel scoreLabel;
     Font font1, font2;
     JButton button1, button2, button3, button4;
-    int dinheiro = 0;
+    static int dinheiro = 1;
     int contador = 1;
     private double multiplicadorSorte = 3.0;
     private double cancheDeGolpeDaSorte = 0.25;
     private int upgrade1 = 10;
     private int upgrade2 = 50;
+    int pontuacao = 1;
 
-    String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+    static String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
     public static void main(String[] args) {
-
-       String path = "c:\\in.txt";
-
-
-        try (BufferedReader br = new BufferedReader(new FileReader(path))){
-
-            String line = br.readLine();
-            while(line!=null){
-                System.out.println(line);
-                line = br.readLine();
-            }
-        }
-        catch (IOException e){
-            System.out.println("ERRO: " + e.getMessage());
-        }
-
         new Main();
     }
 
     public Main() {
+        carregarDados();
         createFont();
         createUI();
+        salvarDados();
+
+    }
+
+    public void salvarDados() {
+        String arquivoDados = "dados_usuario.txt";
+
+        try {
+            FileWriter writer = new FileWriter(arquivoDados);
+            writer.write(nomeJogador + "\n");
+
+
+            writer.close();
+            System.out.println("Dados salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+        }
+    }
+
+    public void carregarDados() {
+        String arquivoDados = "dados_usuario.txt";
+
+        try {
+            FileReader reader = new FileReader(arquivoDados);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            nomeJogador = bufferedReader.readLine();
+
+
+            bufferedReader.close();
+            System.out.println("Dados carregados com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar os dados: " + e.getMessage());
+        }
     }
 
     public void createFont() {
@@ -116,7 +133,7 @@ public class Main {
         multiplicadorGolpeSorte.setFont(font1);
         backgroundPanel.add(multiplicadorGolpeSorte);
 
-        scoreLabel = new JLabel("Pontuação: 0");
+        scoreLabel = new JLabel("Pontuação: "+ dinheiro);
         scoreLabel.setBounds(10, 185, 495, 40);
         scoreLabel.setBackground(Color.GREEN); // Definir cor de fundo verde
         scoreLabel.setOpaque(true); // Tornar o fundo visível
@@ -132,10 +149,11 @@ public class Main {
                 if (sorte <= cancheDeGolpeDaSorte) {
                     dinheiro += contador * multiplicadorSorte;
                 } else {
-                    dinheiro = dinheiro + contador;
+                    dinheiro += contador;
                 }
 
                 scoreLabel.setText("Pontuação: " + dinheiro);
+                salvarDados();
             }
         });
 
@@ -162,16 +180,15 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 playClickSoundUpgrade();
                 if (dinheiro >= upgrade1) {
-                    // Ação a ser executada quando o dinheiro for maior que 10
                     System.out.println("Upgrade realizado!");
-                    dinheiro = dinheiro - upgrade1;
-                    contador = contador + 1;
-                    upgrade1 = upgrade1 + 60;
-                    scoreLabel.setText("Dinheiro: " + dinheiro); // Atualizar o texto do JLabel com o valor do contador
+                    dinheiro -= upgrade1;
+                    contador++;
+                    upgrade1 += 60;
+                    scoreLabel.setText("Pontuação: " + dinheiro);
                     labelPoderClick.setText("Dinheiro por clique: " + contador);
                     upgradeButton.setText("Upgrade (R$" + upgrade1 + ")");
+                    salvarDados();
                 } else {
-                    // Ação a ser executada quando o dinheiro for menor ou igual a 10
                     System.out.println("Dinheiro insuficiente para o upgrade!");
                 }
             }
@@ -181,20 +198,20 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 playClickSoundLucky();
                 if (dinheiro >= upgrade2) {
-                    // Ação a ser executada quando o dinheiro for maior ou igual a 50
                     System.out.println("Upgrade realizado!");
-                    cancheDeGolpeDaSorte = 1;
                     dinheiro -= upgrade2;
-                    upgrade2 = upgrade2 + 80;
+                    cancheDeGolpeDaSorte = 1.0;
+                    upgrade2 += 80;
                     scoreLabel.setText("Dinheiro: " + dinheiro);
                     chanceGolpeSorte.setText("Chanche golpe de sorte: " + cancheDeGolpeDaSorte);
                     upgradeButton2.setText("Upgrade (R$" + upgrade2 + ")");
+                    salvarDados();
                 } else {
-                    // Ação a ser executada quando o dinheiro for menor que 50
                     System.out.println("Dinheiro insuficiente para o upgrade!");
                 }
             }
         });
+
 
         // Declaração das variáveis de tamanho original do ícone
         int larguraOriginal = chicken.getIconWidth();
