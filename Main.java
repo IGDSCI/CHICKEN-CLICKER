@@ -43,6 +43,7 @@ public class Main {
             writer.write(nomeJogador + "\n");
             writer.write(dinheiro + "\n");
             writer.write(contador + "\n");
+            writer.write(cancheDeGolpeDaSorte + "\n");
 
 
             writer.close();
@@ -62,6 +63,7 @@ public class Main {
             nomeJogador = bufferedReader.readLine();
             dinheiro = Integer.parseInt(bufferedReader.readLine());
             contador = Integer.parseInt(bufferedReader.readLine());
+            cancheDeGolpeDaSorte = Double.parseDouble(bufferedReader.readLine());
 
 
             bufferedReader.close();
