@@ -45,6 +45,7 @@ public class Main {
             writer.write(contador + "\n");
             writer.write(cancheDeGolpeDaSorte + "\n");
             writer.write(upgrade1 + "\n");
+            writer.write(upgrade2 + "\n");
 
             writer.close();
             System.out.println("Dados salvos com sucesso!");
@@ -65,7 +66,8 @@ public class Main {
             contador = Integer.parseInt(bufferedReader.readLine());
             cancheDeGolpeDaSorte = Double.parseDouble(bufferedReader.readLine());
             upgrade1 = Integer.parseInt(bufferedReader.readLine());
-
+            upgrade2 = Integer.parseInt(bufferedReader.readLine());
+            
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
         } catch (IOException e) {
