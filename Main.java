@@ -44,7 +44,7 @@ public class Main {
             writer.write(dinheiro + "\n");
             writer.write(contador + "\n");
             writer.write(cancheDeGolpeDaSorte + "\n");
-
+            writer.write(upgrade1 + "\n");
 
             writer.close();
             System.out.println("Dados salvos com sucesso!");
@@ -64,7 +64,7 @@ public class Main {
             dinheiro = Integer.parseInt(bufferedReader.readLine());
             contador = Integer.parseInt(bufferedReader.readLine());
             cancheDeGolpeDaSorte = Double.parseDouble(bufferedReader.readLine());
-
+            upgrade1 = Integer.parseInt(bufferedReader.readLine());
 
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
