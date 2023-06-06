@@ -182,6 +182,22 @@ public class Main {
         backgroundPanel.add(upgradeButton2);
         itemPanel.add(upgradeButton2);
 
+        JPanel itemPanel2 = new JPanel();
+        itemPanel2.setBounds(680, 460, 300, 125); // Defina as coordenadas corretas para ficar abaixo do itemPanel
+        itemPanel2.setBackground(Color.white);
+        itemPanel2.setLayout(new GridLayout(2, 1));
+        backgroundPanel.add(itemPanel2);
+
+// Crie os botões de upgrade para o itemPanel2
+        JButton upgradeButton3 = new JButton("Ajudante 1");
+        upgradeButton3.setFont(font1);
+        upgradeButton3.setVisible(false); // Esconder o botão inicialmente
+        itemPanel2.add(upgradeButton3);
+
+        JButton upgradeButton4 = new JButton(" Ajudante 2");
+        upgradeButton4.setFont(font1);
+        upgradeButton4.setVisible(false); // Esconder o botão inicialmente
+        itemPanel2.add(upgradeButton4);
 
 
 
@@ -226,12 +242,28 @@ public class Main {
         upgradeMenuButton.setFont(font2);
         backgroundPanel.add(upgradeMenuButton);
 
+        JButton upgradeMenuButton2 = new JButton("Ajudantes");
+        upgradeMenuButton2.setBounds(680, 420, 300, 40);
+        upgradeMenuButton2.setFont(font2);
+        backgroundPanel.add(upgradeMenuButton2);
+
         upgradeMenuButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 upgradeButton.setVisible(true); // Mostrar o botão de upgrade 1
                 upgradeButton2.setVisible(true); // Mostrar o botão de upgrade 2
+                upgradeButton3.setVisible(false); // Esconder o botão de ajudante 1
+                upgradeButton4.setVisible(false); // Esconder o botão de ajudante 2
             }
         });
+        upgradeMenuButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                upgradeButton.setVisible(false); // Esconder o botão de upgrade 1
+                upgradeButton2.setVisible(false); // Esconder o botão de upgrade 2
+                upgradeButton3.setVisible(true); // Mostrar o botão de ajudante 1
+                upgradeButton4.setVisible(true); // Mostrar o botão de ajudante 2
+            }
+        });
+
 
 
         // Declaração das variáveis de tamanho original do ícone
