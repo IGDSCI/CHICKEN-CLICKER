@@ -24,6 +24,9 @@ public class Main {
     private Timer timer;
     private int pontosPorSegundo = 0;
     private boolean pintinhoComprado = false;
+    private int precoPintinho = 100;
+
+
 
     static String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
@@ -156,6 +159,8 @@ public class Main {
         multiplicadorGolpeSorte.setFont(font1);
         backgroundPanel.add(multiplicadorGolpeSorte);
 
+
+
         scoreLabel = new JLabel("Pontuação: "+ dinheiro);
         scoreLabel.setBounds(10, 185, 495, 40);
         scoreLabel.setBackground(Color.GREEN); // Definir cor de fundo verde
@@ -205,10 +210,15 @@ public class Main {
         backgroundPanel.add(itemPanel2);
 
 // Crie os botões de upgrade para o itemPanel2
-        JButton pintinhoButton = new JButton("Pintinho");
+        JButton pintinhoButton = new JButton("Pintinho R$ " + precoPintinho);
         pintinhoButton.setFont(font1);
         pintinhoButton.setVisible(false);
         itemPanel2.add(pintinhoButton);
+        if (dinheiro >= precoPintinho) {
+            pintinhoButton.setEnabled(true);
+        } else {
+            pintinhoButton.setEnabled(false);
+        }
 
         JButton upgradeButton4 = new JButton(" Ajudante 2");
         upgradeButton4.setFont(font1);
@@ -254,6 +264,7 @@ public class Main {
                     System.out.println("Dinheiro insuficiente para o upgrade!");
                 }
             }
+
             public void playClickSoundPintinho() {
                 try {
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("pintinhoSound.wav"));
@@ -280,13 +291,20 @@ public class Main {
         pintinhoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                pontosPorSegundo += 3;
-                pintinhoButton.setEnabled(false); // Desabilita o botão após ser clicado
-                pintinhoButton.setText("Pintinho (" + pontosPorSegundo + " por segundo)");
-                timer.start(); // Inicia o temporizador
-                pintinhoComprado = true; // Define a variável pintinhoComprado como true
+                if (dinheiro >= precoPintinho) {
+                    dinheiro -= precoPintinho;
+                    pintinhoButton.setEnabled(false);
+                    pintinhoButton.setText("Pintinho (Comprado)");
+                    pontosPorSegundo += 3;
+                    timer.start();
+                    pintinhoComprado = true;
+                    scoreLabel.setText("Pontuação: " + dinheiro);
+                    salvarDados();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dinheiro insuficiente para comprar o pintinho!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
             }
+
         });
 
         upgradeMenuButton.addActionListener(new ActionListener() {
@@ -328,6 +346,8 @@ public class Main {
                 } else {
                     dinheiro = dinheiro + contador;
                 }
+
+
 
                 scoreLabel.setText("Pontuação: " + dinheiro);
 
