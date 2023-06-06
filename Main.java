@@ -25,7 +25,7 @@ public class Main {
     private int pontosPorSegundo = 0;
     private boolean pintinhoComprado = false;
     private int precoPintinho = 100;
-    private int upgrade3 = 2000;
+    private int upgrade3 = 800;
 
 
 
