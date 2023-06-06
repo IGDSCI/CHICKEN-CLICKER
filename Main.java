@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import javax.swing.Timer;
 import java.util.Scanner;
 
 public class Main {
@@ -20,6 +21,8 @@ public class Main {
     private double cancheDeGolpeDaSorte = 0.25;
     private int upgrade1 = 10;
     private int upgrade2 = 50;
+    private Timer timer;
+    private int pontosPorSegundo = 0;
 
     static String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
@@ -75,6 +78,7 @@ public class Main {
         }
     }
 
+
     public void createFont() {
         font1 = new Font("Comic Sans MS", Font.PLAIN, 32);
         font2 = new Font("Comic Sans MS", Font.PLAIN, 15);
@@ -96,7 +100,18 @@ public class Main {
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dinheiro += pontosPorSegundo;
+                scoreLabel.setText("Pontuação: " + dinheiro);
+                salvarDados();
+            }
+        });
+        timer.setInitialDelay(0); // Inicia o temporizador imediatamente
         window.setContentPane(backgroundPanel);
+
+
 
         JPanel chickenPanel = new JPanel();
         chickenPanel.setBounds(300, 240, 370, 370);
@@ -189,15 +204,17 @@ public class Main {
         backgroundPanel.add(itemPanel2);
 
 // Crie os botões de upgrade para o itemPanel2
-        JButton upgradeButton3 = new JButton("Ajudante 1");
-        upgradeButton3.setFont(font1);
-        upgradeButton3.setVisible(false); // Esconder o botão inicialmente
-        itemPanel2.add(upgradeButton3);
+        JButton pintinhoButton = new JButton("Pintinho");
+        pintinhoButton.setFont(font1);
+        pintinhoButton.setVisible(false);
+        itemPanel2.add(pintinhoButton);
 
         JButton upgradeButton4 = new JButton(" Ajudante 2");
         upgradeButton4.setFont(font1);
         upgradeButton4.setVisible(false); // Esconder o botão inicialmente
         itemPanel2.add(upgradeButton4);
+
+
 
 
 
@@ -236,7 +253,19 @@ public class Main {
                     System.out.println("Dinheiro insuficiente para o upgrade!");
                 }
             }
+            public void playClickSoundPintinho() {
+                try {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("pintinhoSound.wav"));
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
+
+
         JButton upgradeMenuButton = new JButton("Melhorias");
         upgradeMenuButton.setBounds(680, 240, 300, 40);
         upgradeMenuButton.setFont(font2);
@@ -247,11 +276,21 @@ public class Main {
         upgradeMenuButton2.setFont(font2);
         backgroundPanel.add(upgradeMenuButton2);
 
+        pintinhoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pontosPorSegundo += 3;
+                pintinhoButton.setEnabled(false); // Desabilita o botão após ser clicado
+                pintinhoButton.setText("Pintinho (" + pontosPorSegundo + " por segundo)");
+                timer.start(); // Inicia o temporizador
+            }
+        });
+
         upgradeMenuButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 upgradeButton.setVisible(true); // Mostrar o botão de upgrade 1
                 upgradeButton2.setVisible(true); // Mostrar o botão de upgrade 2
-                upgradeButton3.setVisible(false); // Esconder o botão de ajudante 1
+                pintinhoButton.setVisible(false); // Esconder o botão de ajudante 1
                 upgradeButton4.setVisible(false); // Esconder o botão de ajudante 2
             }
         });
@@ -259,10 +298,14 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 upgradeButton.setVisible(false); // Esconder o botão de upgrade 1
                 upgradeButton2.setVisible(false); // Esconder o botão de upgrade 2
-                upgradeButton3.setVisible(true); // Mostrar o botão de ajudante 1
+                pintinhoButton.setVisible(true); // Mostrar o botão de ajudante 1
                 upgradeButton4.setVisible(true); // Mostrar o botão de ajudante 2
             }
+
         });
+
+
+
 
 
 
@@ -327,6 +370,8 @@ public class Main {
         }
     }
 
+
+
     public void playClickSoundLucky() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("luckySound.wav"));
@@ -336,6 +381,8 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 
 }
