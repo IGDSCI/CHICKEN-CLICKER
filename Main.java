@@ -99,7 +99,7 @@ public class Main {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Carregue e desenhe a imagem de fundo
-                ImageIcon backgroundImg = new ImageIcon(getClass().getClassLoader().getResource("fazenda.png"));
+                ImageIcon backgroundImg = new ImageIcon(getClass().getClassLoader().getResource("backgroundfarm.jpg"));
                 Image image = backgroundImg.getImage();
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
