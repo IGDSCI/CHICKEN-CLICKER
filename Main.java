@@ -170,15 +170,18 @@ public class Main {
         itemPanel.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel);
 
-        JButton upgradeButton = new JButton("Upgrade (R$" + upgrade1 + ")");
+        JButton  upgradeButton = new JButton("Upgrade (R$" + upgrade1 + ")");
         upgradeButton.setFont(font1);
+        upgradeButton.setVisible(false); // Esconder o botão inicialmente
         backgroundPanel.add(upgradeButton);
         itemPanel.add(upgradeButton);
 
         JButton upgradeButton2 = new JButton("Upgrade (R$" + upgrade2 + ")");
         upgradeButton2.setFont(font1);
+        upgradeButton2.setVisible(false); // Esconder o botão inicialmente
         backgroundPanel.add(upgradeButton2);
         itemPanel.add(upgradeButton2);
+
 
 
 
@@ -216,6 +219,17 @@ public class Main {
                 } else {
                     System.out.println("Dinheiro insuficiente para o upgrade!");
                 }
+            }
+        });
+        JButton upgradeMenuButton = new JButton("Melhorias");
+        upgradeMenuButton.setBounds(680, 240, 300, 40);
+        upgradeMenuButton.setFont(font2);
+        backgroundPanel.add(upgradeMenuButton);
+
+        upgradeMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                upgradeButton.setVisible(true); // Mostrar o botão de upgrade 1
+                upgradeButton2.setVisible(true); // Mostrar o botão de upgrade 2
             }
         });
 
