@@ -192,6 +192,7 @@ public class Main {
         itemPanel.setBackground(Color.white);
         itemPanel.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel);
+        itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 
         JButton  upgradeButton = new JButton("Upgrade (R$" + upgrade1 + ")");
         upgradeButton.setFont(font1);
