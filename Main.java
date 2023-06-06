@@ -86,8 +86,8 @@ public class Main {
 
 
     public void createFont() {
-        font1 = new Font("Comic Sans MS", Font.PLAIN, 32);
-        font2 = new Font("Comic Sans MS", Font.PLAIN, 15);
+        font1 = new Font("Comic Sans MS", Font.PLAIN, 25);
+        font2 = new Font("Comic Sans MS", Font.PLAIN, 12);
     }
 
     public void createUI() {
@@ -134,7 +134,7 @@ public class Main {
         chickenPanel.add(chickenButton);
 
         JLabel labelNome = new JLabel("Jogador: " + nomeJogador);
-        labelNome.setBounds(10, 15, 495, 50);
+        labelNome.setBounds(10, 15, 400, 50);
         labelNome.setBackground(Color.GREEN); // Definir cor de fundo verde
         labelNome.setOpaque(true); // Tornar o fundo visível
         labelNome.setFont(font1);
@@ -188,7 +188,7 @@ public class Main {
         });
 
         JPanel itemPanel = new JPanel();
-        itemPanel.setBounds(680, 280, 300, 230);
+        itemPanel.setBounds(680, 280, 240, 180);
         itemPanel.setBackground(Color.white);
         itemPanel.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel);
@@ -212,7 +212,7 @@ public class Main {
         itemPanel.add(upgradeButton3);
 
         JPanel itemPanel2 = new JPanel();
-        itemPanel2.setBounds(680, 560, 300, 125); // Defina as coordenadas corretas para ficar abaixo do itemPanel
+        itemPanel2.setBounds(680, 560, 240, 125); // Defina as coordenadas corretas para ficar abaixo do itemPanel
         itemPanel2.setBackground(Color.white);
         itemPanel2.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel2);
@@ -304,12 +304,12 @@ public class Main {
 
 
         JButton upgradeMenuButton = new JButton("Melhorias");
-        upgradeMenuButton.setBounds(680, 240, 300, 40);
+        upgradeMenuButton.setBounds(680, 240, 240, 40);
         upgradeMenuButton.setFont(font2);
         backgroundPanel.add(upgradeMenuButton);
 
         JButton upgradeMenuButton2 = new JButton("Ajudantes");
-        upgradeMenuButton2.setBounds(680, 530, 300, 40);
+        upgradeMenuButton2.setBounds(680, 520, 240, 40);
         upgradeMenuButton2.setFont(font2);
         backgroundPanel.add(upgradeMenuButton2);
 
