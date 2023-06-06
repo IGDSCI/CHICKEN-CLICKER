@@ -23,6 +23,7 @@ public class Main {
     private int upgrade2 = 50;
     private Timer timer;
     private int pontosPorSegundo = 0;
+    private boolean pintinhoComprado = false;
 
     static String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
@@ -279,10 +280,12 @@ public class Main {
         pintinhoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 pontosPorSegundo += 3;
                 pintinhoButton.setEnabled(false); // Desabilita o botão após ser clicado
                 pintinhoButton.setText("Pintinho (" + pontosPorSegundo + " por segundo)");
                 timer.start(); // Inicia o temporizador
+                pintinhoComprado = true; // Define a variável pintinhoComprado como true
             }
         });
 
@@ -327,6 +330,14 @@ public class Main {
                 }
 
                 scoreLabel.setText("Pontuação: " + dinheiro);
+
+                if (pintinhoComprado) {
+                    pintinhoButton.setEnabled(false); // Desabilita o botão se o pintinho já foi comprado
+                    pintinhoButton.setText("Pintinho (Comprado)");
+                } else {
+                    pintinhoButton.setEnabled(true); // Habilita o botão se o pintinho ainda não foi comprado
+                    pintinhoButton.setText("Pintinho");
+                }
 
                 if (foiReduzido) {
                     // Restaurar o tamanho original do ícone
