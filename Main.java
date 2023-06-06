@@ -25,6 +25,8 @@ public class Main {
     private int pontosPorSegundo = 0;
     private boolean pintinhoComprado = false;
     private int precoPintinho = 100;
+    private int upgrade3 = 2000;
+
 
 
 
@@ -186,7 +188,7 @@ public class Main {
         });
 
         JPanel itemPanel = new JPanel();
-        itemPanel.setBounds(680, 280, 300, 125);
+        itemPanel.setBounds(680, 280, 300, 230);
         itemPanel.setBackground(Color.white);
         itemPanel.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel);
@@ -203,8 +205,13 @@ public class Main {
         backgroundPanel.add(upgradeButton2);
         itemPanel.add(upgradeButton2);
 
+        JButton upgradeButton3 = new JButton("Upgrade (R$" + upgrade3 + ")");
+        upgradeButton3.setFont(font1);
+        upgradeButton3.setVisible(false);
+        itemPanel.add(upgradeButton3);
+
         JPanel itemPanel2 = new JPanel();
-        itemPanel2.setBounds(680, 460, 300, 125); // Defina as coordenadas corretas para ficar abaixo do itemPanel
+        itemPanel2.setBounds(680, 560, 300, 125); // Defina as coordenadas corretas para ficar abaixo do itemPanel
         itemPanel2.setBackground(Color.white);
         itemPanel2.setLayout(new GridLayout(2, 1));
         backgroundPanel.add(itemPanel2);
@@ -241,6 +248,23 @@ public class Main {
                     scoreLabel.setText("Pontuação: " + dinheiro);
                     labelPoderClick.setText("Dinheiro por clique: " + contador);
                     upgradeButton.setText("Upgrade (R$" + upgrade1 + ")");
+                    salvarDados();
+                } else {
+                    System.out.println("Dinheiro insuficiente para o upgrade!");
+                }
+            }
+        });
+        upgradeButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                playClickSoundUpgrade();
+                if (dinheiro >= upgrade3) {
+                    System.out.println("Upgrade realizado!");
+                    dinheiro -= upgrade3;
+                    multiplicadorSorte += 1.0;
+                    upgrade3 += 200; // Aumenta o custo do próximo upgrade em 200
+                    scoreLabel.setText("Dinheiro: " + dinheiro);
+                    multiplicadorGolpeSorte.setText("Multiplicador golpe de sorte: " + multiplicadorSorte);
+                    upgradeButton3.setText("Upgrade (R$" + upgrade3 + ")");
                     salvarDados();
                 } else {
                     System.out.println("Dinheiro insuficiente para o upgrade!");
@@ -284,7 +308,7 @@ public class Main {
         backgroundPanel.add(upgradeMenuButton);
 
         JButton upgradeMenuButton2 = new JButton("Ajudantes");
-        upgradeMenuButton2.setBounds(680, 420, 300, 40);
+        upgradeMenuButton2.setBounds(680, 530, 300, 40);
         upgradeMenuButton2.setFont(font2);
         backgroundPanel.add(upgradeMenuButton2);
 
@@ -311,6 +335,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 upgradeButton.setVisible(true); // Mostrar o botão de upgrade 1
                 upgradeButton2.setVisible(true); // Mostrar o botão de upgrade 2
+                upgradeButton3.setVisible(true); // Mostrar o botão de upgrade 2
                 pintinhoButton.setVisible(false); // Esconder o botão de ajudante 1
                 upgradeButton4.setVisible(false); // Esconder o botão de ajudante 2
             }
@@ -319,6 +344,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 upgradeButton.setVisible(false); // Esconder o botão de upgrade 1
                 upgradeButton2.setVisible(false); // Esconder o botão de upgrade 2
+                upgradeButton3.setVisible(false); // Esconder o botão de upgrade 2
                 pintinhoButton.setVisible(true); // Mostrar o botão de ajudante 1
                 upgradeButton4.setVisible(true); // Mostrar o botão de ajudante 2
             }
