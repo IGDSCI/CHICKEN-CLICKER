@@ -3,6 +3,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -11,15 +15,55 @@ public class Tela extends JFrame {
     private int height;
     private Status status;
     private Galinha galinha;
-    private Upgrade upgrade1;
-    private Upgrade upgrade2;
+    private int upgrade1;
+    private int upgrade2;
     private ArrayList<Upgrade> upgradesComprados = new ArrayList<>();
     private JLabel upgradeCountLabel;
 
     public Tela(int width, int height) {
+        carregarDados();
         this.width = width;
         this.height = height;
+        this.status = new Status();
         this.createScreen();
+        salvarDados();
+    }
+
+    public void salvarDados() {
+        String arquivoDados = "dados_usuario.txt";
+        try {
+            FileWriter writer = new FileWriter(arquivoDados);
+            writer.write(status.getNomeJogador() + "\n");
+            writer.write(status.getDinheiro() + "\n");
+            writer.write(status.getDinheiroPorClique() + "\n");
+            writer.write(status.getChancheGolpeDeSorte() + "\n");
+            writer.write(upgrade1 + "\n");
+            writer.write(upgrade2 + "\n");
+
+            writer.close();
+            System.out.println("Dados salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+        }
+    }
+    public void carregarDados() {
+        String arquivoDados = "dados_usuario.txt";
+        try {
+            FileReader reader = new FileReader(arquivoDados);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            status.getNomeJogador() = bufferedReader.readLine();
+            status.getDinheiro() = Integer.parseInt(bufferedReader.readLine());
+            status.getDinheiroPorClique() = Integer.parseInt(bufferedReader.readLine());
+            status.getChancheGolpeDeSorte() = Double.parseDouble(bufferedReader.readLine());
+            upgrade1 = Integer.parseInt(bufferedReader.readLine());
+
+            upgrade2 = Integer.parseInt(bufferedReader.readLine());
+
+            bufferedReader.close();
+            System.out.println("Dados carregados com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar os dados: " + e.getMessage());
+        }
     }
 
     private void createScreen() {
@@ -93,7 +137,10 @@ public class Tela extends JFrame {
         upgradeCountLabel.setText("Upgrades Comprados: " + totalUpgrades);
     }
 
+
+
     public static void main(String[] args) {
+
         int screenWidth = 800;
         int screenHeight = 600;
         new Tela(screenWidth, screenHeight);

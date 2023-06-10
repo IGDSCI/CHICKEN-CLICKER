@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Status extends JPanel {
     private int dinheiroPorClique = 1;
@@ -12,6 +13,7 @@ public class Status extends JPanel {
     private JLabel golpeDeSorteLabel;
     private JLabel chanceDeGolpeDeSorteLabel;
     private JLabel pontuacaoLabel;
+    private String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
     public Status() {
         this.createStatusPanel();
@@ -19,14 +21,23 @@ public class Status extends JPanel {
 
     private void createStatusPanel() {
         this.setLayout(new BoxLayout(this, 1));
+        this.add(new JLabel("Nome: " + this.nomeJogador));
         this.dinheiroLabel = new JLabel("Dinheiro por clique: " + this.dinheiroPorClique);
         this.golpeDeSorteLabel = new JLabel("Golpe de Sorte: " + this.golpeDeSorte);
         this.chanceDeGolpeDeSorteLabel = new JLabel("Chance de Golpe de Sorte: " + this.chanceDeGolpeDeSorte);
         this.pontuacaoLabel = new JLabel("Dinheiro: " + this.dinheiro);
+        this.add(this.nomeJogador);
         this.add(this.dinheiroLabel);
         this.add(this.golpeDeSorteLabel);
         this.add(this.chanceDeGolpeDeSorteLabel);
         this.add(this.pontuacaoLabel);
+    }
+
+    private void add(String nomeJogador) {
+    }
+
+    public String getNomeJogador() {
+        return nomeJogador;
     }
 
     public int getDinheiro() {
