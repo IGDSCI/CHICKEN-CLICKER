@@ -4,16 +4,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Save {
-    public static void salvarNomeJogador(String nomeJogador) {
+    public static void salvarNomeJogador(String nomeJogador, int dinheiro, int dinheiroPorClique) {
         String arquivoDados = "dados_usuario.txt";
         try {
             FileWriter writer = new FileWriter(arquivoDados);
-            writer.write(nomeJogador);
+            writer.write(nomeJogador + "\n");
+            writer.write(dinheiro + "\n");
+            writer.write(dinheiroPorClique + "\n");
 
             writer.close();
-            System.out.println("Nome do jogador salvo com sucesso!");
+            System.out.println("Dados salvos com sucesso!");
         } catch (IOException e) {
-            System.out.println("Erro ao salvar o nome do jogador: " + e.getMessage());
+            System.out.println("Erro ao salvar os dados do jogador: " + e.getMessage());
         }
     }
 
@@ -24,6 +26,8 @@ public class Save {
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             String nomeJogador = bufferedReader.readLine();
+            int dinheiro = Integer.parseInt(bufferedReader.readLine());
+            int dinheiroPorClique = Integer.parseInt(bufferedReader.readLine());
 
             bufferedReader.close();
             System.out.println("Nome do jogador carregado com sucesso!");

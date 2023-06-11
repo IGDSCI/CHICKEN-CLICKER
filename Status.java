@@ -1,8 +1,8 @@
 import java.awt.Dimension;
-        import javax.swing.BoxLayout;
-        import javax.swing.JLabel;
-        import javax.swing.JPanel;
-        import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Status extends JPanel {
     private int dinheiroPorClique = 1;
@@ -53,7 +53,7 @@ public class Status extends JPanel {
         this.nomeJogador = Save.carregarNomeJogador();
         if (this.nomeJogador == null) {
             this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
-            Save.salvarNomeJogador(this.nomeJogador);
+            Save.salvarNomeJogador(this.nomeJogador, this.dinheiro, this.dinheiroPorClique);
         } else {
             System.out.println("Nome do jogador carregado: " + this.nomeJogador);
         }
