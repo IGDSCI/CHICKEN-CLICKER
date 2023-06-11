@@ -1,8 +1,8 @@
 import java.awt.Dimension;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.*;
+        import javax.swing.BoxLayout;
+        import javax.swing.JLabel;
+        import javax.swing.JPanel;
+        import javax.swing.*;
 
 public class Status extends JPanel {
     private int dinheiroPorClique = 1;
@@ -15,7 +15,48 @@ public class Status extends JPanel {
     private JLabel pontuacaoLabel;
     private String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
 
+        /*public void salvarDados() {
+        String arquivoDados = "dados_usuario.txt";
+        try {
+            FileWriter writer = new FileWriter(arquivoDados);
+            writer.write(getNomeJogador() + "\n");
+            writer.write(getDinheiro() + "\n");
+            writer.write(getDinheiroPorClique() + "\n");
+            writer.write(getChancheGolpeDeSorte() + "\n");
+
+            writer.close();
+            System.out.println("Dados salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+        }
+    }
+    public void carregarDados() {
+        String arquivoDados = "dados_usuario.txt";
+        try {
+            FileReader reader = new FileReader(arquivoDados);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            setNomeJogador(bufferedReader.readLine());
+            setDinheiro(Integer.parseInt(bufferedReader.readLine()));
+            setDinheiroPorClique(Integer.parseInt(bufferedReader.readLine()));
+            setChanceDeGolpeDeSorte(Integer.parseInt(bufferedReader.readLine()));
+
+            bufferedReader.close();
+            System.out.println("Dados carregados com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar os dados: " + e.getMessage());
+        }
+    }*/
+
     public Status() {
+        this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+        this.nomeJogador = Save.carregarNomeJogador();
+        if (this.nomeJogador == null) {
+            this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+            Save.salvarNomeJogador(this.nomeJogador);
+        } else {
+            System.out.println("Nome do jogador carregado: " + this.nomeJogador);
+        }
         this.createStatusPanel();
     }
 

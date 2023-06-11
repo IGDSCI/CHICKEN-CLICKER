@@ -21,22 +21,17 @@ public class Tela extends JFrame {
     private JLabel upgradeCountLabel;
 
     public Tela(int width, int height) {
-        carregarDados();
         this.width = width;
         this.height = height;
         this.status = new Status();
         this.createScreen();
-        salvarDados();
     }
 
-    public void salvarDados() {
+    /*public void salvarDados() {
         String arquivoDados = "dados_usuario.txt";
         try {
             FileWriter writer = new FileWriter(arquivoDados);
-            writer.write(status.getNomeJogador() + "\n");
-            writer.write(status.getDinheiro() + "\n");
-            writer.write(status.getDinheiroPorClique() + "\n");
-            writer.write(status.getChancheGolpeDeSorte() + "\n");
+
             writer.write(upgrade1 + "\n");
             writer.write(upgrade2 + "\n");
 
@@ -51,10 +46,7 @@ public class Tela extends JFrame {
         try {
             FileReader reader = new FileReader(arquivoDados);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            status.getNomeJogador() = bufferedReader.readLine();
-            status.getDinheiro() = Integer.parseInt(bufferedReader.readLine());
-            status.getDinheiroPorClique() = Integer.parseInt(bufferedReader.readLine());
-            status.getChancheGolpeDeSorte() = Double.parseDouble(bufferedReader.readLine());
+
             upgrade1 = Integer.parseInt(bufferedReader.readLine());
 
             upgrade2 = Integer.parseInt(bufferedReader.readLine());
@@ -64,7 +56,7 @@ public class Tela extends JFrame {
         } catch (IOException e) {
             System.out.println("Erro ao carregar os dados: " + e.getMessage());
         }
-    }
+    }*/
 
     private void createScreen() {
         this.setTitle("Meu Jogo");
