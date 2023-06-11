@@ -50,10 +50,10 @@ public class Status extends JPanel {
 
     public Status() {
         this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
-        this.nomeJogador = Save.carregarNomeJogador();
+        this.nomeJogador = Save.carregarDados();
         if (this.nomeJogador == null) {
             this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
-            Save.salvarNomeJogador(this.nomeJogador, this.dinheiro, this.dinheiroPorClique);
+            Save.salvarDados(this.nomeJogador, this.dinheiro, this.dinheiroPorClique, this.chanceDeGolpeDeSorte, this.golpeDeSorte);
         } else {
             System.out.println("Nome do jogador carregado: " + this.nomeJogador);
         }

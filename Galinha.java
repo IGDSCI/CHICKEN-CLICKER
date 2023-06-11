@@ -14,7 +14,7 @@ public class Galinha extends JLabel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 Galinha.this.aumentarPontuacao();
-                Save.salvarNomeJogador(status.getNomeJogador(), status.getDinheiro(), status.getDinheiroPorClique());
+                Save.salvarDados(status.getNomeJogador(), status.getDinheiro(), status.getDinheiroPorClique(), status.getChancheGolpeDeSorte(), status.getGolpeDeSorte());
             }
         });
     }
