@@ -21,28 +21,22 @@ public class Save {
         }
     }
 
-    public static String carregarDados() {
+    public static void carregarDados(Status status) {
+        String arquivoDados = "dados_usuario.txt";
         try {
-            String arquivoDados = "dados_usuario.txt";
             FileReader reader = new FileReader(arquivoDados);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
-            String nomeJogador = bufferedReader.readLine();
-            int dinheiro = Integer.parseInt(bufferedReader.readLine());
-            int dinheiroPorClique = Integer.parseInt(bufferedReader.readLine());
-            double chanceDeGolpeDeSorte = Double.parseDouble((bufferedReader.readLine()));
-            int golpeDeSorte = Integer.parseInt(bufferedReader.readLine());
+            status.setNomeJogador(bufferedReader.readLine());
+            status.setDinheiro(Integer.parseInt(bufferedReader.readLine()));
+            status.setDinheiroPorClique(Integer.parseInt(bufferedReader.readLine()));
+            status.setChanceDeGolpeDeSorte(Double.parseDouble(bufferedReader.readLine()));
+            status.setGolpeDeSorte(Integer.parseInt(bufferedReader.readLine()));
 
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
-            return nomeJogador;
         } catch (IOException e) {
-            System.out.println("Erro ao carregar o nome do jogador: " + e.getMessage());
+            System.out.println("Erro ao carregar os dados do jogador: " + e.getMessage());
         }
-        return null;
-    }
-
-    public static void salvarUpgrade(int upgrade1, int upgrade2){
-
     }
 }

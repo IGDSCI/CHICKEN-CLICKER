@@ -49,15 +49,20 @@ public class Status extends JPanel {
     }*/
 
     public Status() {
-        this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
-        this.nomeJogador = Save.carregarDados();
-        if (this.nomeJogador == null) {
-            this.nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
-            Save.salvarDados(this.nomeJogador, this.dinheiro, this.dinheiroPorClique, this.chanceDeGolpeDeSorte, this.golpeDeSorte);
+        nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+        // Remova a chamada do método Save.carregarDados(this) daqui
+
+        if (nomeJogador == null || nomeJogador.isEmpty()) {
+            nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+            Save.salvarDados(nomeJogador, dinheiro, dinheiroPorClique, chanceDeGolpeDeSorte, golpeDeSorte);
         } else {
-            System.out.println("Nome do jogador carregado: " + this.nomeJogador);
+            System.out.println("Nome do jogador carregado: " + nomeJogador);
         }
-        this.createStatusPanel();
+
+        createStatusPanel();
+
+        // Mova a chamada do método Save.carregarDados(this) para cá
+        Save.carregarDados(this);
     }
 
     private void createStatusPanel() {
@@ -120,5 +125,8 @@ public class Status extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(180, 100);
+    }
+
+    public void setNomeJogador(String nomeJogador) {
     }
 }

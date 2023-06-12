@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
-
 public class Tela extends JFrame {
     private int width;
     private int height;
@@ -19,22 +18,18 @@ public class Tela extends JFrame {
     private int upgrade2;
     private ArrayList<Upgrade> upgradesComprados = new ArrayList<>();
     private JLabel upgradeCountLabel;
-
     public Tela(int width, int height) {
         this.width = width;
         this.height = height;
         this.status = new Status();
         this.createScreen();
     }
-
     /*public void salvarDados() {
         String arquivoDados = "dados_usuario.txt";
         try {
             FileWriter writer = new FileWriter(arquivoDados);
-
             writer.write(upgrade1 + "\n");
             writer.write(upgrade2 + "\n");
-
             writer.close();
             System.out.println("Dados salvos com sucesso!");
         } catch (IOException e) {
@@ -46,18 +41,14 @@ public class Tela extends JFrame {
         try {
             FileReader reader = new FileReader(arquivoDados);
             BufferedReader bufferedReader = new BufferedReader(reader);
-
             upgrade1 = Integer.parseInt(bufferedReader.readLine());
-
             upgrade2 = Integer.parseInt(bufferedReader.readLine());
-
             bufferedReader.close();
             System.out.println("Dados carregados com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao carregar os dados: " + e.getMessage());
         }
     }*/
-
     private void createScreen() {
         this.setTitle("Meu Jogo");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +69,7 @@ public class Tela extends JFrame {
         this.updateStatusPanelSize(); // Atualiza a dimensão preferida do painel de status
         this.galinha = new Galinha(this.status);
         this.galinha.setBounds(230, 75, 355, 385);
+        this.galinha.setBounds(230, 85, 355, 385);
         backgroundPanel.add(this.galinha);
         Upgrade1 upgrade1 = new Upgrade1(this.status, this.upgradesComprados);
         Upgrade2 upgrade2 = new Upgrade2(this.status, this.upgradesComprados);
@@ -91,17 +83,14 @@ public class Tela extends JFrame {
         JButton upgrade3Button = new JButton("Upgrade 3 (0) R$20");
         upgrade3Button.setBounds(10, 300, 170, 30);
         backgroundPanel.add(upgrade3Button);
-
         this.upgradeCountLabel = new JLabel("Upgrades Comprados: 0");
         this.upgradeCountLabel.setBounds(10, 350, 200, 20);
         backgroundPanel.add(this.upgradeCountLabel);
-
         upgrade1Button.addActionListener((e) -> {
             upgrade1.funcaoUpgrade();
             upgrade1Button.setText("Upgrade 1 (" + upgrade1.getNivel() + ") R$" + upgrade1.getCusto());
             atualizarContagemUpgrades();
         });
-
         upgrade2Button.addActionListener((e) -> {
             upgrade2.funcaoUpgrade();
             upgrade2Button.setText("Upgrade 2 (" + upgrade2.getNivel() + ") R$" + upgrade2.getCusto());
@@ -116,23 +105,15 @@ public class Tela extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
-
-
     private void updateStatusPanelSize() {
         Dimension preferredSize = this.status.getPreferredSize();
         this.status.setSize(preferredSize);
     }
-
     private void atualizarContagemUpgrades() {
         int totalUpgrades = upgradesComprados.size();
         upgradeCountLabel.setText("Upgrades Comprados: " + totalUpgrades);
     }
-
-
-
     public static void main(String[] args) {
-
         int screenWidth = 800;
         int screenHeight = 600;
         new Tela(screenWidth, screenHeight);
