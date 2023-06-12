@@ -111,7 +111,7 @@ public class Tela extends JFrame {
         upgrade3Button.setFont(upgrade3Button.getFont().deriveFont(14f)); // Define o tamanho da fonte para 14
         backgroundPanel.add(upgrade3Button);
 
-        
+
 
         this.upgradeCountLabel = new JLabel("Upgrades Comprados: 0");
         this.upgradeCountLabel.setBounds(10, 350, 200, 20);
@@ -144,9 +144,21 @@ public class Tela extends JFrame {
         backgroundPanel.add(ajudanteButton);
 
         ajudanteButton.addActionListener((e) -> {
-            Ajudante1 ajudante1 = new Ajudante1(this.status);
-            ajudante1.comprar();
-            ajudanteButton.setEnabled(false);
+            if (!upgradesComprados.isEmpty()) {
+                Upgrade ultimoUpgrade = upgradesComprados.get(upgradesComprados.size() - 1);
+                int custoAjudante = ultimoUpgrade.getCusto();
+                Ajudante1 ajudante1 = new Ajudante1(this.status, custoAjudante);
+                ajudante1.comprar();
+                ajudanteButton.setEnabled(false);
+                ajudanteButton.setText("Ajudante 1 (3 pontos/s) R$" + custoAjudante);
+            } else {
+                // Caso nenhum upgrade tenha sido comprado, defina um valor padrão
+                int custoPadrao = 100; // Defina o valor padrão aqui
+                Ajudante1 ajudante1 = new Ajudante1(this.status, custoPadrao);
+                ajudante1.comprar();
+                ajudanteButton.setEnabled(false);
+                ajudanteButton.setText("Ajudante 1 (3 pontos/s) R$" + custoPadrao);
+            }
         });
 
         Font robotoFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/res/Roboto.ttf"));

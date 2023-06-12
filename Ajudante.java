@@ -5,6 +5,7 @@ public abstract class Ajudante {
     protected Status status;
     protected int pontosPorSegundo;
     protected Timer timer;
+    protected int custo;
 
     public Ajudante(Status status) {
         this.status = status;
