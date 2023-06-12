@@ -19,7 +19,7 @@ public class Upgrade1 extends Upgrade {
             int novaPontuacao = this.status.getDinheiro() - this.custo;
             this.status.setDinheiro(novaPontuacao);
             ++this.nivel;
-            this.custo += 20;
+            this.custo *= 2; // Atualiza o custo multiplicando por 2
             upgradesComprados.add(this); // Adiciona o próprio upgrade à lista
             playClickSoundUpgrade();
         }

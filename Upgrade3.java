@@ -13,15 +13,15 @@ public class Upgrade3 extends Upgrade {
 
     public void funcaoUpgrade() {
         if (this.status.getDinheiro() > this.custo) {
-            int novoGolpeDeSorte = this.status.getGolpeDeSorte() + 1;
-            this.status.setGolpeDeSorte(novoGolpeDeSorte);
+            int novoDinheiroPorClique = this.status.getDinheiroPorClique() + 1;
+            this.status.setDinheiroPorClique(novoDinheiroPorClique);
             int novaPontuacao = this.status.getDinheiro() - this.custo;
             this.status.setDinheiro(novaPontuacao);
             ++this.nivel;
-            this.custo += 20;
+            this.custo *= 3; // Atualiza o custo multiplicando por 2
             upgradesComprados.add(this); // Adiciona o próprio upgrade à lista
             playClickSoundUpgrade();
         }
-
     }
 }
+
