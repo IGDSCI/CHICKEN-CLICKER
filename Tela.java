@@ -1,13 +1,6 @@
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.LayoutManager;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -24,11 +17,17 @@ public class Tela extends JFrame {
     private boolean upgradesVisiveis = false;
 
 
-    public Tela(int width, int height) {
+    public Tela(int width, int height) throws IOException, FontFormatException {
         this.width = width;
         this.height = height;
         this.status = new Status();
-        this.createScreen();
+        try {
+            this.createScreen();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /*public void salvarDados() {
@@ -62,7 +61,9 @@ public class Tela extends JFrame {
         }
     }*/
 
-    private void createScreen() {
+    private void createScreen() throws IOException, FontFormatException {
+
+
         this.setTitle("Meu Jogo");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel backgroundPanel = new JPanel() {
@@ -73,6 +74,8 @@ public class Tela extends JFrame {
                 g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
+
+
         backgroundPanel.setLayout(null);
         backgroundPanel.setPreferredSize(new Dimension(this.width, this.height));
         this.getContentPane().add(backgroundPanel);
@@ -86,6 +89,9 @@ public class Tela extends JFrame {
         Upgrade1 upgrade1 = new Upgrade1(this.status, this.upgradesComprados);
         Upgrade2 upgrade2 = new Upgrade2(this.status, this.upgradesComprados);
         Upgrade3 upgrade3 = new Upgrade3(this.status, this.upgradesComprados);
+
+
+
 
         JButton upgrade1Button = new JButton("Upgrade 1 (" + upgrade1.getNivel() + ") R$" + upgrade1.getCusto());
         upgrade1Button.setBounds(10, 200, 170, 30);
@@ -131,6 +137,7 @@ public class Tela extends JFrame {
             atualizarContagemUpgrades();
         });
 
+
         upgradeButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 upgradesVisiveis = upgradeButton.isSelected();
@@ -163,6 +170,12 @@ public class Tela extends JFrame {
                 ajudanteButton.setVisible(upgradesVisiveis);
             }
         });
+        Font robotoFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/res/Roboto.ttf"));
+        upgradeButton.setFont(robotoFont.deriveFont(14f));
+        ajudanteButton.setFont(robotoFont.deriveFont(14f));
+        upgrade1Button.setFont(robotoFont.deriveFont(14f));
+        upgrade2Button.setFont(robotoFont.deriveFont(14f));
+        upgrade3Button.setFont(robotoFont.deriveFont(14f));
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -180,7 +193,7 @@ public class Tela extends JFrame {
         upgradeCountLabel.setText("Upgrades Comprados: " + totalUpgrades);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FontFormatException {
         int screenWidth = 800;
         int screenHeight = 600;
         new Tela(screenWidth, screenHeight);
