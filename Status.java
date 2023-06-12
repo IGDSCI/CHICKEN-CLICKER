@@ -116,6 +116,10 @@ public class Status extends JPanel {
         this.golpeDeSorte = golpeDeSorte;
         this.golpeDeSorteLabel.setText("Golpe de Sorte: " + golpeDeSorte);
     }
+    public void adicionarPontos(int pontos) {
+        this.dinheiro += pontos;
+        this.pontuacaoLabel.setText("Dinheiro: " + this.dinheiro);
+    }
 
     @Override
     public Dimension getPreferredSize() {
