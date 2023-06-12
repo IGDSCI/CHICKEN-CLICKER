@@ -80,6 +80,7 @@ public class Tela extends JFrame {
         backgroundPanel.add(upgrade1Button);
         JButton upgrade2Button = new JButton("Upgrade 2 (0) R$20");
         upgrade2Button.setBounds(10, 250, 170, 30);
+        upgrade2Button.setToolTipText("Comprando esse upgrade você irá aumentar em 0.01 a chance do seu golpe de sorte");
         backgroundPanel.add(upgrade2Button);
         JButton upgrade3Button = new JButton("Upgrade 3 (0) R$20");
         upgrade3Button.setBounds(10, 300, 170, 30);
