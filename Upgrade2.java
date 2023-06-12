@@ -13,7 +13,7 @@ public class Upgrade2 extends Upgrade {
 
     public void funcaoUpgrade() {
         if (this.status.getDinheiro() > this.custo && this.status.getChancheGolpeDeSorte() != 1.0) {
-            double novaChancheDeGolpeDeSorte = this.status.getChancheGolpeDeSorte() + 0.75;
+            double novaChancheDeGolpeDeSorte = this.status.getChancheGolpeDeSorte() + 0.05;
             this.status.setChanceDeGolpeDeSorte(novaChancheDeGolpeDeSorte);
             int novaPontuacao = this.status.getDinheiro() - this.custo;
             this.status.setDinheiro(novaPontuacao);
