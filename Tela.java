@@ -14,7 +14,7 @@ public class Tela extends JFrame {
     private int upgrade2;
     private ArrayList<Upgrade> upgradesComprados = new ArrayList<>();
     private JLabel upgradeCountLabel;
-    private boolean upgradesVisiveis = false;
+
 
 
     public Tela(int width, int height) throws IOException, FontFormatException {
@@ -95,25 +95,23 @@ public class Tela extends JFrame {
 
         JButton upgrade1Button = new JButton("Upgrade 1 (" + upgrade1.getNivel() + ") R$" + upgrade1.getCusto());
         upgrade1Button.setBounds(10, 200, 170, 30);
-        upgrade1Button.setVisible(false);
+        upgrade1Button.setVisible(true);
         upgrade1Button.setFont(upgrade1Button.getFont().deriveFont(14f)); // Define o tamanho da fonte para 14
         backgroundPanel.add(upgrade1Button);
 
         JButton upgrade2Button = new JButton("Upgrade 2 (" + upgrade2.getNivel() + ") R$" + upgrade2.getCusto());
         upgrade2Button.setBounds(10, 250, 170, 30);
-        upgrade2Button.setVisible(false);
+        upgrade2Button.setVisible(true);
         upgrade2Button.setFont(upgrade2Button.getFont().deriveFont(14f)); // Define o tamanho da fonte para 14
         backgroundPanel.add(upgrade2Button);
 
         JButton upgrade3Button = new JButton("Upgrade 3 (" + upgrade3.getNivel() + ") R$" + upgrade3.getCusto());
         upgrade3Button.setBounds(10, 300, 170, 30);
-        upgrade3Button.setVisible(false);
+        upgrade3Button.setVisible(true);
         upgrade3Button.setFont(upgrade3Button.getFont().deriveFont(14f)); // Define o tamanho da fonte para 14
         backgroundPanel.add(upgrade3Button);
 
-        JToggleButton upgradeButton = new JToggleButton("Upgrade");
-        upgradeButton.setBounds(10, 150, 170, 30);
-        backgroundPanel.add(upgradeButton);
+        
 
         this.upgradeCountLabel = new JLabel("Upgrades Comprados: 0");
         this.upgradeCountLabel.setBounds(10, 350, 200, 20);
@@ -138,19 +136,10 @@ public class Tela extends JFrame {
         });
 
 
-        upgradeButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                upgradesVisiveis = upgradeButton.isSelected();
 
-                // Define a visibilidade dos botões de upgrade com base no estado do JToggleButton
-                upgrade1Button.setVisible(upgradesVisiveis);
-                upgrade2Button.setVisible(upgradesVisiveis);
-                upgrade3Button.setVisible(upgradesVisiveis);
-            }
-        });
         JButton ajudanteButton = new JButton("Ajudante 1 (3 pontos/s)");
         ajudanteButton.setBounds(10, 400, 170, 30);
-        ajudanteButton.setVisible(false);
+        ajudanteButton.setVisible(true);
         ajudanteButton.setFont(ajudanteButton.getFont().deriveFont(14f)); // Define o tamanho da fonte para 14
         backgroundPanel.add(ajudanteButton);
 
@@ -159,19 +148,8 @@ public class Tela extends JFrame {
             ajudante1.comprar();
             ajudanteButton.setEnabled(false);
         });
-        upgradeButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                upgradesVisiveis = upgradeButton.isSelected();
 
-                // Define a visibilidade dos botões de upgrade e do botão do ajudante com base no estado do JToggleButton
-                upgrade1Button.setVisible(upgradesVisiveis);
-                upgrade2Button.setVisible(upgradesVisiveis);
-                upgrade3Button.setVisible(upgradesVisiveis);
-                ajudanteButton.setVisible(upgradesVisiveis);
-            }
-        });
         Font robotoFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/res/Roboto.ttf"));
-        upgradeButton.setFont(robotoFont.deriveFont(14f));
         ajudanteButton.setFont(robotoFont.deriveFont(14f));
         upgrade1Button.setFont(robotoFont.deriveFont(14f));
         upgrade2Button.setFont(robotoFont.deriveFont(14f));
