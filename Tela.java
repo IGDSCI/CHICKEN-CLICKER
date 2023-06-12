@@ -110,6 +110,7 @@ public class Tela extends JFrame {
         this.status.setSize(preferredSize);
     }
     private void atualizarContagemUpgrades() {
+        
         int totalUpgrades = upgradesComprados.size();
         upgradeCountLabel.setText("Upgrades Comprados: " + totalUpgrades);
     }
