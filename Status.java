@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +15,10 @@ public class Status extends JPanel {
     private JLabel chanceDeGolpeDeSorteLabel;
     private JLabel pontuacaoLabel;
     private String nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
+    private JLabel upgradeCompradosLabel;
+    private ArrayList<Upgrade> upgradesComprados;
+
+
 
         /*public void salvarDados() {
         String arquivoDados = "dados_usuario.txt";
@@ -49,6 +54,7 @@ public class Status extends JPanel {
     }*/
 
     public Status() {
+
         nomeJogador = JOptionPane.showInputDialog("Digite o seu nome:");
         // Remova a chamada do método Save.carregarDados(this) daqui
 
@@ -59,7 +65,8 @@ public class Status extends JPanel {
             System.out.println("Nome do jogador carregado: " + nomeJogador);
         }
 
-        createStatusPanel();
+        this.createStatusPanel();
+        this.createUpgradesCompradosLabel();
 
         // Mova a chamada do método Save.carregarDados(this) para cá
         Save.carregarDados(this);
@@ -77,6 +84,15 @@ public class Status extends JPanel {
         this.add(this.golpeDeSorteLabel);
         this.add(this.chanceDeGolpeDeSorteLabel);
         this.add(this.pontuacaoLabel);
+    }
+
+    private void createUpgradesCompradosLabel() {
+        this.upgradeCompradosLabel = new JLabel("Upgrades Comprados: 0");
+        this.add(this.upgradeCompradosLabel);
+    }
+
+    public void atualizarContagemUpgrades(int totalUpgrades) {
+        this.upgradeCompradosLabel.setText("Upgrades Comprados: " + totalUpgrades);
     }
 
     private void add(String nomeJogador) {

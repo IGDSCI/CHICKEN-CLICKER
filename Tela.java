@@ -21,7 +21,7 @@ public class Tela extends JFrame {
     public Tela(int width, int height) {
         this.width = width;
         this.height = height;
-        this.status = new Status();
+        this.status = status;
         this.createScreen();
     }
     /*public void salvarDados() {
@@ -82,24 +82,24 @@ public class Tela extends JFrame {
         backgroundPanel.add(upgrade2Button);
         JButton upgrade3Button = new JButton("Upgrade 3 (0) R$20");
         upgrade3Button.setBounds(10, 300, 170, 30);
+        
         backgroundPanel.add(upgrade3Button);
-        this.upgradeCountLabel = new JLabel("Upgrades Comprados: 0");
-        this.upgradeCountLabel.setBounds(10, 350, 200, 20);
-        backgroundPanel.add(this.upgradeCountLabel);
+
         upgrade1Button.addActionListener((e) -> {
             upgrade1.funcaoUpgrade();
             upgrade1Button.setText("Upgrade 1 (" + upgrade1.getNivel() + ") R$" + upgrade1.getCusto());
-            atualizarContagemUpgrades();
+            status.atualizarContagemUpgrades(upgradesComprados.size());
         });
         upgrade2Button.addActionListener((e) -> {
             upgrade2.funcaoUpgrade();
             upgrade2Button.setText("Upgrade 2 (" + upgrade2.getNivel() + ") R$" + upgrade2.getCusto());
-            atualizarContagemUpgrades();
+            status.atualizarContagemUpgrades(upgradesComprados.size());
         });
         upgrade3Button.addActionListener((e) -> {
             upgrade3.funcaoUpgrade();
             upgrade3Button.setText("Upgrade 3 (" + upgrade3.getNivel() + ") R$" + upgrade3.getCusto());
-            atualizarContagemUpgrades();
+            status.atualizarContagemUpgrades(upgradesComprados.size());
+
         });
         this.pack();
         this.setLocationRelativeTo(null);
@@ -109,11 +109,7 @@ public class Tela extends JFrame {
         Dimension preferredSize = this.status.getPreferredSize();
         this.status.setSize(preferredSize);
     }
-    private void atualizarContagemUpgrades() {
-        
-        int totalUpgrades = upgradesComprados.size();
-        upgradeCountLabel.setText("Upgrades Comprados: " + totalUpgrades);
-    }
+
     public static void main(String[] args) {
         int screenWidth = 800;
         int screenHeight = 600;
