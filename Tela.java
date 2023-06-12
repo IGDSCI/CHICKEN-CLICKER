@@ -50,7 +50,7 @@ public class Tela extends JFrame {
         }
     }*/
     private void createScreen() {
-        this.setTitle("Meu Jogo");
+        this.setTitle("ChickenClicker");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel backgroundPanel = new JPanel() {
             protected void paintComponent(Graphics g) {
