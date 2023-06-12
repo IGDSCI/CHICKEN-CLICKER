@@ -76,13 +76,14 @@ public class Tela extends JFrame {
         Upgrade3 upgrade3 = new Upgrade3(this.status, this.upgradesComprados);
         JButton upgrade1Button = new JButton("Upgrade 1 (0) R$20");
         upgrade1Button.setBounds(10, 200, 170, 30);
+        upgrade1Button.setToolTipText("Comprando esse upgrade você irá aumentar em 1 o seu dinheiro por clique");
         backgroundPanel.add(upgrade1Button);
         JButton upgrade2Button = new JButton("Upgrade 2 (0) R$20");
         upgrade2Button.setBounds(10, 250, 170, 30);
         backgroundPanel.add(upgrade2Button);
         JButton upgrade3Button = new JButton("Upgrade 3 (0) R$20");
         upgrade3Button.setBounds(10, 300, 170, 30);
-        
+
         backgroundPanel.add(upgrade3Button);
 
         upgrade1Button.addActionListener((e) -> {
