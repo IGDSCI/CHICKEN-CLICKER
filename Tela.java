@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,6 +21,8 @@ public class Tela extends JFrame {
     private int upgrade2;
     private ArrayList<Upgrade> upgradesComprados = new ArrayList<>();
     private JLabel upgradeCountLabel;
+    private boolean upgradesVisiveis = false;
+
 
     public Tela(int width, int height) {
         this.width = width;
@@ -82,15 +86,24 @@ public class Tela extends JFrame {
         Upgrade1 upgrade1 = new Upgrade1(this.status, this.upgradesComprados);
         Upgrade2 upgrade2 = new Upgrade2(this.status, this.upgradesComprados);
         Upgrade3 upgrade3 = new Upgrade3(this.status, this.upgradesComprados);
-        JButton upgrade1Button = new JButton("Upgrade 1 (0) R$20");
+
+        JButton upgrade1Button = new JButton("Upgrade 1 (" + upgrade1.getNivel() + ") R$" + upgrade1.getCusto());
         upgrade1Button.setBounds(10, 200, 170, 30);
+        upgrade1Button.setVisible(false);
         backgroundPanel.add(upgrade1Button);
-        JButton upgrade2Button = new JButton("Upgrade 2 (0) R$20");
+        JButton upgrade2Button = new JButton("Upgrade 2 (" + upgrade2.getNivel() + ") R$" + upgrade2.getCusto());
         upgrade2Button.setBounds(10, 250, 170, 30);
+        upgrade2Button.setVisible(false);
         backgroundPanel.add(upgrade2Button);
-        JButton upgrade3Button = new JButton("Upgrade 3 (0) R$20");
+        JButton upgrade3Button = new JButton("Upgrade 3 (" + upgrade3.getNivel() + ") R$" + upgrade3.getCusto());
         upgrade3Button.setBounds(10, 300, 170, 30);
+        upgrade3Button.setVisible(false);
         backgroundPanel.add(upgrade3Button);
+        JToggleButton upgradeButton = new JToggleButton("Upgrade");
+        upgradeButton.setBounds(10, 150, 170, 30);
+        backgroundPanel.add(upgradeButton);
+
+
 
         this.upgradeCountLabel = new JLabel("Upgrades Comprados: 0");
         this.upgradeCountLabel.setBounds(10, 350, 200, 20);
@@ -107,16 +120,31 @@ public class Tela extends JFrame {
             upgrade2Button.setText("Upgrade 2 (" + upgrade2.getNivel() + ") R$" + upgrade2.getCusto());
             atualizarContagemUpgrades();
         });
+
         upgrade3Button.addActionListener((e) -> {
             upgrade3.funcaoUpgrade();
             upgrade3Button.setText("Upgrade 3 (" + upgrade3.getNivel() + ") R$" + upgrade3.getCusto());
             atualizarContagemUpgrades();
         });
+
+        upgradeButton.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                upgradesVisiveis = upgradeButton.isSelected();
+
+                // Define a visibilidade dos botões de upgrade com base no estado do JToggleButton
+                upgrade1Button.setVisible(upgradesVisiveis);
+                upgrade2Button.setVisible(upgradesVisiveis);
+                upgrade3Button.setVisible(upgradesVisiveis);
+            }
+        });
+
+
+
+
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
 
 
     private void updateStatusPanelSize() {
@@ -130,9 +158,7 @@ public class Tela extends JFrame {
     }
 
 
-
     public static void main(String[] args) {
-
         int screenWidth = 800;
         int screenHeight = 600;
         new Tela(screenWidth, screenHeight);
