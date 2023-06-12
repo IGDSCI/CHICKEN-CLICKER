@@ -4,6 +4,7 @@ public class Upgrade1 extends Upgrade {
     private Status status;
     private ArrayList<Upgrade> upgradesComprados;
 
+
     public Upgrade1(Status status, ArrayList<Upgrade> upgradesComprados) {
         this.status = status;
         this.upgradesComprados = upgradesComprados;
@@ -20,6 +21,7 @@ public class Upgrade1 extends Upgrade {
             ++this.nivel;
             this.custo += 20;
             upgradesComprados.add(this); // Adiciona o próprio upgrade à lista
+            playClickSoundUpgrade();
         }
     }
 }

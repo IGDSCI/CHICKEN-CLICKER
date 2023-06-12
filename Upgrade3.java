@@ -20,6 +20,7 @@ public class Upgrade3 extends Upgrade {
             ++this.nivel;
             this.custo += 20;
             upgradesComprados.add(this); // Adiciona o próprio upgrade à lista
+            playClickSoundUpgrade();
         }
 
     }
