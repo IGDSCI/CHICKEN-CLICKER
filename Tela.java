@@ -77,7 +77,7 @@ public class Tela extends JFrame {
         this.status.setBounds(10, 10, 200, 120);
         this.updateStatusPanelSize(); // Atualiza a dimensão preferida do painel de status
         this.galinha = new Galinha(this.status);
-        this.galinha.setBounds(230, 75, 355, 385);
+        this.galinha.setBounds(230, 85, 355, 385);
         backgroundPanel.add(this.galinha);
         Upgrade1 upgrade1 = new Upgrade1(this.status, this.upgradesComprados);
         Upgrade2 upgrade2 = new Upgrade2(this.status, this.upgradesComprados);
